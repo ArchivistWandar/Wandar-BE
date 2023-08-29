@@ -29,6 +29,8 @@ const apollo = new ApolloServer({
 
 
 
+await apollo.start();
+
 
 app.use(
   "/graphql",
@@ -46,9 +48,8 @@ app.use(
 );
 
 
-await apollo.start();
 
 app.use("/static", express.static("uploads"));
 
-await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
+new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
