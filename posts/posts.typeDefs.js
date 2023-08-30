@@ -4,7 +4,7 @@ const typeDefs = `#graphql
     createdAt: String!
     updatedAt: String!
     user: User!
-    hashtages: [Hashtag]
+    hashtags: [Hashtag]
     caption: String!
     land: Land!
     photos: [Photo]!

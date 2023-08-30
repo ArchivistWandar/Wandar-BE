@@ -8,7 +8,7 @@ AWS.config.update({
 })
 
 export const uploadToS3 = async (file, userId, folderName) => {
-  const BucketName = "instaclone-uploadss"
+  const BucketName = "wander-uploadss"
   const { filename, createReadStream } = await file;
   const readStream = createReadStream();
   const objectName = `${folderName}/${userId}-${Date.now()}-${filename}`;
@@ -21,7 +21,7 @@ export const uploadToS3 = async (file, userId, folderName) => {
   return Location
 }
 export const delPhotoS3 = async (fileUrl, folderName) => {
-  const BucketName = "instaclone-uploadss"
+  const BucketName = "wander-uploadss"
 
   const filePath = fileUrl.split("/uploads/")[1]; // 파일명만 split 후 선택
 

@@ -4,7 +4,7 @@ Wander BackEnd
 
 [x] express server 
 
-[ ] AWS bucket (****)
+[x] AWS bucket (****)
     S3 관련 upload, delete, 폴더 prameter 추가 (share util)
     create post에서 import
 
