@@ -12,7 +12,6 @@ datasource db {
 
 model User {
   id        Int      @id @default(autoincrement())
-  name      String
   username  String   @unique
   bio       String?
   avatar    String?
@@ -33,7 +32,7 @@ model Land {
   posts     Post[]
   photos    Photo[]
   landname  String
-  location  String
+  location  String?
   userId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -58,12 +57,11 @@ model Photo {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   photo     String
-  location  String
+  location  String?
   user      User     @relation(fields: [userId], references: [id])
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post[]
   land      Land     @relation(fields: [landId], references: [id])
   userId    Int
-  postId    Int
   landId    Int
 }
 
