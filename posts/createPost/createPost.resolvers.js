@@ -5,18 +5,20 @@ import { protectedResolver } from "../../users/users.utils.js";
 export default {
   Mutation: {
     createPost: protectedResolver(
-      async (_, {caption, photos, land}) => {
+      async (_, { caption, photos, land }, { loggedInUser }) => {
 
         //upload 구조 수정 필요
         let hashtagsObj = [];
-        for (let i = 0; i < photos.length; i++){
-          photo = photos[i]
-          const fileURL = await uploadToS3(photo, loggedInUser)
+        let fileURLArray = [];
+        for (let i = 0; i < photos.length; i++) {
+          let photo = photos[i]
+          const fileURL = await uploadToS3(photo, loggedInUser.id, "uploads");
+          fileURLArray.push({ fileURL })
         }
 
         return await client.post.create({
           data: {
-            photos: fileURL,
+            photos: fileURLArray,
             caption,
             land,
             user: { connect: { id: loggedInUser.id } },

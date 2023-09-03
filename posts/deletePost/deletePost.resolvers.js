@@ -1,5 +1,5 @@
-import client from "../../client";
-import { protectedResolver } from "../../users/users.utils";
+import client from "../../client.js";
+import { protectedResolver } from "../../users/users.utils.js";
 
 export default {
   Mutation: {

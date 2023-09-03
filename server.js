@@ -51,5 +51,5 @@ app.use(
 
 app.use("/static", express.static("uploads"));
 
-new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
+await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);

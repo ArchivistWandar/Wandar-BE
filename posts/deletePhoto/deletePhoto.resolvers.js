@@ -1,4 +1,4 @@
-import { protectedResolver } from "../../users/users.utils";
+import { protectedResolver } from "../../users/users.utils.js";
 
 export default {
   Mutation: {
