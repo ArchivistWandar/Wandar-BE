@@ -1,5 +1,7 @@
 import AWS from "aws-sdk"
 
+import { S3 } from "@aws-sdk/client-s3";
+
 AWS.config.update({
   credentials: {
     accessKeyId: process.env.AWS_KEY,
@@ -7,19 +9,26 @@ AWS.config.update({
   }
 })
 
-export const uploadToS3 = async (file, userId, folderName) => {
+export const uploadToS3 = async (files, userId, folderName) => {
   const BucketName = "wander-uploadss"
-  const { filename, createReadStream } = await file;
-  const readStream = createReadStream();
-  const objectName = `${folderName}/${userId}-${Date.now()}-${filename}`;
-  const { Location } = await new AWS.S3().upload({
-    Key: objectName,
-    Bucket: BucketName,
-    ACL: "public-read",
-    Body: readStream
-  }).promise()
-  return Location
+  let locationArray = [];
+  for (let i = 0; i < files.length; i++) {
+    const file = await files[i]
+    const filePromise = await file.promise
+    const { filename, createReadStream } = await filePromise;
+    const readStream = createReadStream();
+    const objectName = `${folderName}/${userId}-${Date.now()}-${filename}`;
+    const { Location } = await new AWS.S3().upload({
+      Key: objectName,
+      Bucket: BucketName,
+      ACL: "public-read",
+      Body: readStream
+    }).promise()
+    locationArray.push(Location)
+  }
+  return locationArray
 }
+
 export const delPhotoS3 = async (fileUrl, folderName) => {
   const BucketName = "wander-uploadss"
 
@@ -29,6 +38,6 @@ export const delPhotoS3 = async (fileUrl, folderName) => {
     Bucket: `${BucketName}/${folderName}`, // Bucket에 폴더 명 uploads 추가
     Key: filePath,
   };
-  await new AWS.S3().deleteObject(params).promise();
+  await new S3().deleteObject(params).promise();
 
 };

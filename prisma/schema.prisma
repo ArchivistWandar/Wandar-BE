@@ -41,14 +41,14 @@ model Land {
 model Post {
   id       Int       @id @default(autoincrement())
   user     User      @relation(fields: [userId], references: [id])
-  photos   Photo[]
+  photos   String[]
   caption  String
   hashtags Hashtag[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    Int
-  Land      Land     @relation(fields: [landId], references: [id])
+  land      Land     @relation(fields: [landId], references: [id])
   landId    Int
 }
 
@@ -59,7 +59,6 @@ model Photo {
   photo     String
   location  String?
   user      User     @relation(fields: [userId], references: [id])
-  post      Post[]
   land      Land     @relation(fields: [landId], references: [id])
   userId    Int
   landId    Int
