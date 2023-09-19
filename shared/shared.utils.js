@@ -29,15 +29,17 @@ export const uploadToS3 = async (files, userId, folderName) => {
   return locationArray
 }
 
-export const delPhotoS3 = async (fileUrl, folderName) => {
+export const delPhotoS3 = async (fileUrls, folderName) => {
   const BucketName = "wander-uploadss"
+  for (let i = 0; i < fileUrls.length; i++) {
+    const fileUrl= await fileUrls[i]
+    const filePath = fileUrl.split("/uploads/")[1]; // 파일명만 split 후 선택
 
-  const filePath = fileUrl.split("/uploads/")[1]; // 파일명만 split 후 선택
-
-  const params = {
-    Bucket: `${BucketName}/${folderName}`, // Bucket에 폴더 명 uploads 추가
-    Key: filePath,
-  };
-  await new S3().deleteObject(params).promise();
+    const params = {
+      Bucket: `${BucketName}/${folderName}`, // Bucket에 폴더 명 uploads 추가
+      Key: filePath,
+    };
+    await new AWS.S3().deleteObject(params).promise(); //파일 이름에 한글 들어있으면 삭제가 안됨..환장한다 진짜
+  } 
 
 };

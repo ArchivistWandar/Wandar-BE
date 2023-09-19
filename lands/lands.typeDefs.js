@@ -5,7 +5,6 @@ const typeDefs = `#graphql
     updatedAt: String!
     user: User!
     post: [Post]
-    photos: [Photo]
     landname: String!
     location: String!
 

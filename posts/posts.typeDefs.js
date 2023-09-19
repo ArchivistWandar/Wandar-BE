@@ -9,6 +9,8 @@ const typeDefs = `#graphql
     land: Land!
     photos: [Photo]!
     isMine: Boolean!
+    isPublic: Boolean!
+    isPublished: Boolean!
   }
 
   type Photo {

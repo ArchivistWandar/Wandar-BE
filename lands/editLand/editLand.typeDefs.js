@@ -1,13 +1,11 @@
 const typeDefs = `#graphql
-
   type Mutation {
-    editPost(
-      id: Int!,
-      caption: String,
-      land: String,
-      photos: [Upload]
+    editLand(
+      id: Int!
+      landname: String
     ): MutationResponse!
   }
 
 `
+
 export default typeDefs

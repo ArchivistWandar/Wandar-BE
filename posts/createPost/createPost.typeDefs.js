@@ -5,7 +5,8 @@ const typeDefs = `#graphql
     createPost(
       caption: String!,
       photos: [Upload]!,
-      landId: Int!
+      landId: Int!,
+      isPublic: Boolean!
     ): MutationResponse!
   }
 

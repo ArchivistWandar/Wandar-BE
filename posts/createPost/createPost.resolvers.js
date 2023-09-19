@@ -6,7 +6,7 @@ import { processHashtags } from "../posts.utils.js";
 export default {
   Mutation: {
     createPost: protectedResolver(
-      async (_, { caption, photos, landId }, { loggedInUser }) => {
+      async (_, { caption, photos, landId, isPublic }, { loggedInUser }) => {
 
         //upload 구조 수정 필요
         let hashtagsObj = [];
@@ -34,6 +34,7 @@ export default {
           data: {
             photos: fileURLArray,
             caption,
+            isPublic,
             land: {connect: {id: landId}},
             user: { connect: { id: loggedInUser.id } },
             ...(hashtagsObj.length > 0 && { hashtags: { connectOrCreate: hashtagsObj, } })
