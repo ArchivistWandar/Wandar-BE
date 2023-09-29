@@ -20,13 +20,21 @@ Wander BackEnd
 * SEQUENCE
 
 [] see hashtag
-[] upload photo
-[] create post
+[-] upload photo
+[x] create post
 [] see photo
 [] see post
-[] delete photo
-[] edit post
-[] delete post
+[-] delete photo
+[x] edit post
+[x] delete post
+
+POST>> is public, is published 속성 추가
+create에는 반영되어있고 edit 수정 필요
+
+RECORD>> 모델 새로 만들어야함!
+photos,theme, title, ispublic, ispublished
+photo 모델 어찌할지 생각좀 해보고.. 아마도 해시태그랑 같은 방식
+create, edit, delete, see, 
 
 
 * ISSUES

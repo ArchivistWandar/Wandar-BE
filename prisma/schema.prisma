@@ -41,7 +41,8 @@ model Land {
 model Post {
   id          Int       @id @default(autoincrement())
   user        User      @relation(fields: [userId], references: [id])
-  photos      String[]
+  photos      Photo[]
+  title       String    @default("No title")
   caption     String
   hashtags    Hashtag[]
   isPublic    Boolean   @default(true)
@@ -57,12 +58,15 @@ model Photo {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  post      Post     @relation(fields: [postId], references: [id],onDelete: Cascade)
   photo     String
   location  String?
+  isPublic  Boolean @default(true)
   user      User     @relation(fields: [userId], references: [id])
   land      Land     @relation(fields: [landId], references: [id])
   userId    Int
   landId    Int
+  postId    Int
 }
 
 model Hashtag {
@@ -71,4 +75,15 @@ model Hashtag {
   updatedAt DateTime @updatedAt
   posts     Post[]
   hashtag   String
+}
+
+model Record {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String
+  photos      String[]
+  theme       String
+  isPublic    Boolean  @default(true)
+  isPublished Boolean  @default(false)
 }

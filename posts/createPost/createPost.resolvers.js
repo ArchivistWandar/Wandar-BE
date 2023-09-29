@@ -6,7 +6,7 @@ import { processHashtags } from "../posts.utils.js";
 export default {
   Mutation: {
     createPost: protectedResolver(
-      async (_, { caption, photos, landId, isPublic }, { loggedInUser }) => {
+      async (_, { title, caption, photos, landId, isPublic, isPublished }, { loggedInUser }) => {
 
         //upload 구조 수정 필요
         let hashtagsObj = [];
@@ -18,8 +18,9 @@ export default {
         //   fileURLArray.push({ fileURL })
         // }
         const fileURLArray = await uploadToS3(photos, loggedInUser.id, "uploads")
+
         const land = await client.land.findUnique({ where: { id: landId } })
-        console.log(land)
+
         if (!land) {
           return {
             ok: false,
@@ -29,17 +30,43 @@ export default {
         if (caption) {
           hashtagsObj = processHashtags(caption)
         }
+        const uploadedPhotos = fileURLArray.map(
+          (url) => ({
+            photo: url,
+            isPublic,
+            land: { connect: { id: landId } },
+            user: { connect: { id: loggedInUser.id } }
+          })
+        )
+        
 
-        await client.post.create({
+
+        const createdPost = await client.post.create({
           data: {
-            photos: fileURLArray,
+            photos: { create: uploadedPhotos },
+            title,
             caption,
             isPublic,
-            land: {connect: {id: landId}},
+            isPublished,
+            land: { connect: { id: landId } },
             user: { connect: { id: loggedInUser.id } },
             ...(hashtagsObj.length > 0 && { hashtags: { connectOrCreate: hashtagsObj, } })
           }
         })
+        
+
+        // for (i = 0; i < fileURLArray.length; i++) {
+        //   await client.photo.create({
+        //     data: {
+        //       photo: fileURLArray[i],
+        //       land: { connect: { id: landId } },
+        //       user: { connect: { id: loggedInUser.id } },
+        //       post: createdPost,
+        //       isPublic
+        //     }
+        //   })
+        // }
+
         return {
           ok: true,
         }

@@ -3,9 +3,11 @@ const typeDefs = `#graphql
   type Mutation {
     editPost(
       id: Int!,
+      title: String,
       caption: String,
-      land: String,
-      photos: [Upload]
+      landId: Int,
+      photos: [Upload],
+      isPublic: Boolean
     ): MutationResponse!
   }
 

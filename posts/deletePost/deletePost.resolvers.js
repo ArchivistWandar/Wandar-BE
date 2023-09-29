@@ -20,9 +20,14 @@ export default {
             error: "Unauthorized user."
           }
         }
-        const {photos} = await client.post.delete({ where: { id } })
-        delPhotoS3(photos, "uploads")
-        return{
+
+
+        const { photos } = await client.post.delete({ where: { id }, include: { photos: true } })
+        const photosURLArray = photos.map((obj) => obj.photo)
+        if (photosURLArray) {
+          delPhotoS3(photosURLArray, "uploads")
+        }
+        return {
           ok: true
         }
         //client.post.delete

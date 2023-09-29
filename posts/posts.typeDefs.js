@@ -5,6 +5,7 @@ const typeDefs = `#graphql
     updatedAt: String!
     user: User!
     hashtags: [Hashtag]
+    title: String!
     caption: String!
     land: Land!
     photos: [Photo]!
@@ -18,10 +19,10 @@ const typeDefs = `#graphql
     createdAt: String!
     updatedAt: String!
     photo: String!
-    location: String!
     user: User!
     post: Post!
     land: Land!
+    isPublic: Boolean!
   }
 
   type Hashtag {
