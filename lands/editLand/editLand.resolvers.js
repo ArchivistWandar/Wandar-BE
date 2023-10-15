@@ -5,16 +5,25 @@ export default {
   Mutation: {
     editLand: protectedResolver(
       async (_, { id, landname }, { loggedInUser }) => {
-        const oldLand = client.land.findUnique({ where: { id, userId: loggedInUser.id } })
-        console.log(landname)
+        const oldLand = await client.land.findUnique({ where: { id }, select: { landname: true, userId: true } })
+        const existingLandname = await client.land.findFirst({ where: { landname }, select: { landname: true } })
         if (!oldLand) {
-          console.log("notfound")
           return {
             ok: false,
             error: "Land not found."
           }
+        } else if (oldLand.userId != loggedInUser.id) {
+          return {
+            ok: false,
+            error: "Unauthorized user"
+          }
+
+        } else if (existingLandname) {
+          return {
+            ok: false,
+            error: "already existing landname."
+          }
         } else {
-          console.log("found")
           const land = await client.land.update({
             where: { id },
             data: {

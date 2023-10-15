@@ -7,7 +7,7 @@ export default {
     createLand: protectedResolver(
 
       async (_, { landname }, { loggedInUser }) => {
-        const existingLand = await client.land.findFirst({ where: { landname } });
+        const existingLand = await client.land.findFirst({ where: { landname, userId: loggedInUser.id } });
         if (existingLand) {
           return {
             ok: false,

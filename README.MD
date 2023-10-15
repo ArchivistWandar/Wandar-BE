@@ -19,11 +19,11 @@ Wander BackEnd
 
 * SEQUENCE
 
-[] see hashtag
+[x] see hashtag
 [-] upload photo
 [x] create post
-[] see photo
-[] see post
+[x] see photo
+[x] see post
 [-] delete photo
 [x] edit post
 [x] delete post
@@ -36,6 +36,10 @@ photos,theme, title, ispublic, ispublished
 photo 모델 어찌할지 생각좀 해보고.. 아마도 해시태그랑 같은 방식
 create, edit, delete, see, 
 
+LAND>> 
+create, delete, edit 예외처리 완료 / see
+
+23.10.15 >> 3d 데이터 스트링, record resolver
 
 * ISSUES
 

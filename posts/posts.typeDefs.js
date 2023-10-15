@@ -29,7 +29,7 @@ const typeDefs = `#graphql
     id: Int!
     hashtag: String!
     posts: [Post]
-    totalPhotos: Int!
+    totalPosts: Int!
     createdAt: String!
     updatedAt: String!
   }

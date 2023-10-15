@@ -1,6 +1,7 @@
 import client from "../../client.js";
 import { uploadToS3 } from "../../shared/shared.utils.js";
 import { protectedResolver } from "../../users/users.utils.js";
+import { processHashtags } from "../posts.utils.js";
 
 export default {
   Mutation: {
@@ -15,11 +16,15 @@ export default {
             ok: false,
             error: "Post not found."
           }
+        } else if (oldPost.userId != loggedInUser.id) {
+          return {
+            ok: false,
+            error: "Unauthorized User"
+          }
         }
         //photo 업로드는 해결, hashtag 처리 필요
 
-        console.log(landId, oldPost.landId)
-        console.log(isPublic, oldPost.isPublic)
+        const hashtagsObj = processHashtags(caption)
 
         const fileURLArray = await uploadToS3(photos, loggedInUser.id, "uploads")
         const uploadedPhotos = fileURLArray.map(
@@ -31,7 +36,6 @@ export default {
           })
         ) || []
 
-        console.log(uploadedPhotos)
 
         const post = await client.post.update({
           where: { id },
@@ -46,6 +50,10 @@ export default {
                 create: uploadedPhotos
               }
             }),
+            ...(hashtagsObj.length > 0 && { hashtags: {
+              disconnect: oldPost.hashtags,
+              connectOrCreate: hashtagsObj,
+            } }),
             isPublic: (isPublic != undefined ? isPublic : oldPost.isPublic)
           }
         })

@@ -1,7 +1,6 @@
 const typeDefs = `#graphql
   type Query {
-    seePhotos(userId: Int!): [Photo]
+    seeLand(userId: Int!):[Land]
   }
 `
-
 export default typeDefs

@@ -3,25 +3,26 @@ import { protectedResolver } from "../../users/users.utils.js";
 
 export default {
   Mutation: {
-    deleteLand: protectedResolver(
+    deleteRecord: protectedResolver(
       async (_, { id }, { loggedInUser }) => {
-        const land = await client.land.findUnique({ where: { id }, select: { userId: true } })
-        if (!land) {
+        const record = await client.record.findUnique({ where: { id } })
+        if (!record) {
           return {
             ok: false,
-            error: "Land not found"
+            error: "record not found"
           }
-        } else if (land.userId != loggedInUser.id) {
+        } else if (record.userId != loggedInUser.id) {
           return {
             ok: false,
-            error: "Unauthorized user"
+            error: "Unauthorized User"
           }
         } else {
-          await client.land.delete({ where: { id } })
+          await client.record.delete({ where: { id } })
           return {
             ok: true
           }
         }
+
       }
     )
   }
