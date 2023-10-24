@@ -4,7 +4,7 @@ import { protectedResolver } from "../../users/users.utils.js";
 export default {
   Mutation: {
     createRecord: protectedResolver(
-      async (_, { title, photoIds, theme }, { loggedInUser }) => {
+      async (_, { title, photoIds, theme, isPublic }, { loggedInUser }) => {
         for (let i = 0; i < photoIds.length; i++) {
           const photo = await client.photo.findUnique({ where: { id: photoIds[i] }, select: { userId: true } })
           if (!photo) {
@@ -24,7 +24,8 @@ export default {
             user: { connect: { id: loggedInUser.id } },
             photos: { connect: photoIds.map((photoId) => ({ id: photoId })) },
             theme,
-            title
+            title,
+            isPublic
           }
         })
 

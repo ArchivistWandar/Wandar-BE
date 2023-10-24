@@ -6,7 +6,7 @@ const typeDefs = `#graphql
     user: User!
     post: [Post]
     landname: String!
-    location: String!
+    composition: String
 
 
   }

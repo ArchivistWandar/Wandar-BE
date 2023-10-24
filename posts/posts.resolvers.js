@@ -6,10 +6,10 @@ export default {
       return client.user.findUnique({ where: { id: userId } })
     },
     hashtags: ({ id }) => {
-      return client.hashtag.findMany({ where: { posts: { some: { id } } } })
+      return client.hashtag.findMany({ where: { posts: { id } } })
     },
     photos: ({ id }) => {
-      return client.photo.findMany({ where: { post: { some: { id } } } })
+      return client.photo.findMany({ where: { post: { id } } })
     },
     isMine: ({ userId }, _, { loggedInUser }) => {
       if (!loggedInUser) {

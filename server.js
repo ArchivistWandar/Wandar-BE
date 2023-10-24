@@ -12,6 +12,8 @@ import { typeDefs, resolvers } from "./schema.js";
 import { getUser } from "./users/users.utils.js";
 import logger from "morgan";
 import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
+import { startServerAndCreateLambdaHandler, handlers } from '@as-integrations/aws-lambda';
+
 
 const app = express();
 const PORT = process.env.PORT;
@@ -53,3 +55,9 @@ app.use("/static", express.static("uploads"));
 
 await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
+
+// export const graphqlHandler = startServerAndCreateLambdaHandler(
+//   server,
+//   // We will be using the Proxy V2 handler
+//   handlers.createAPIGatewayProxyEventV2RequestHandler(),
+// );

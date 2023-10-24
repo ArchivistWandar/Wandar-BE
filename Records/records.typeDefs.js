@@ -7,6 +7,7 @@ const typeDefs = `#graphql
     title: String!
     photos: [Photo!]
     theme: String!
+    isPublic: Boolean!
   }
 `
 export default typeDefs

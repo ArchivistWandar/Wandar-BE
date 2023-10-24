@@ -3,6 +3,7 @@ const typeDefs = `#graphql
     editLand(
       id: Int!
       landname: String
+      composition: String
     ): MutationResponse!
   }
 

@@ -4,7 +4,7 @@ import { protectedResolver } from "../../users/users.utils.js";
 export default {
   Mutation: {
     editRecord: protectedResolver(
-      async (_, { id, title, photoIds, theme }, { loggedInUser }) => {
+      async (_, { id, title, photoIds, theme, isPublic }, { loggedInUser }) => {
         for (let i = 0; i < photoIds.length; i++) {
           const photo = await client.photo.findUnique({ where: { id: photoIds[i] }, select: { userId: true } })
           if (!photo) {
@@ -45,7 +45,8 @@ export default {
               }
             }),
             theme,
-            title
+            title,
+            isPublic
           }
         })
 

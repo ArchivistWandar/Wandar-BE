@@ -4,7 +4,7 @@ import { protectedResolver } from "../../users/users.utils.js";
 export default {
   Mutation: {
     editLand: protectedResolver(
-      async (_, { id, landname }, { loggedInUser }) => {
+      async (_, { id, landname, composition }, { loggedInUser }) => {
         const oldLand = await client.land.findUnique({ where: { id }, select: { landname: true, userId: true } })
         const existingLandname = await client.land.findFirst({ where: { landname }, select: { landname: true } })
         if (!oldLand) {
@@ -27,7 +27,8 @@ export default {
           const land = await client.land.update({
             where: { id },
             data: {
-              landname
+              landname,
+              composition
             }
           })
           return {

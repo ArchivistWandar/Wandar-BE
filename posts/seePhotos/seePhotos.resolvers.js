@@ -11,7 +11,7 @@ export default {
           const photoList = client.photo.findMany({ where: { userId, isPublic: true } })
           return photoList
         } else {
-          const photoList = client.photo.findMany({ where: { userId } })
+          const photoList = client.photo.findMany({ where: { userId }, select: { photo: true } })
           return photoList
         }
 

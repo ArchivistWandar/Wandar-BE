@@ -11,7 +11,7 @@ export default {
           const postList = client.post.findMany({
             where: { userId, isPublic: true },
             include: {
-              photos: true,
+              photos: { select: { photo: true } },
               land: true,
               user: true,
               hashtags: true
@@ -22,7 +22,7 @@ export default {
           const postList = client.post.findMany({
             where: { userId },
             include: {
-              photos: true,
+              photos: { select: { photo: true } },
               land: true,
               user: true,
               hashtags: true

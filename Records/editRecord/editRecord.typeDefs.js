@@ -6,6 +6,7 @@ const typeDefs = `#graphql
       title: String,
       photoIds: [Int],
       theme: String
+      isPublic: Boolean
     ): MutationResponse!
   }
 
