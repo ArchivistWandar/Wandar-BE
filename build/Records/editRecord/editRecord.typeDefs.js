@@ -1,0 +1,2 @@
+const typeDefs = "#graphql\n\n  type Mutation {\n    editRecord (\n      id: Int!\n      title: String,\n      photoIds: [Int],\n      theme: String\n      isPublic: Boolean\n    ): MutationResponse!\n  }\n\n";
+export default typeDefs;

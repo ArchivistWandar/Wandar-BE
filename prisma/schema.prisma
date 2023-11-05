@@ -17,7 +17,7 @@ model User {
   avatar    String?
   email     String   @unique
   password  String
-  photo     Photo[]
+  photos    Photo[]
   lands     Land[]
   posts     Post[]
   followers User[]   @relation("FollowRelation")
@@ -37,6 +37,8 @@ model Land {
   userId      Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  Record      Record?  @relation(fields: [recordId], references: [id])
+  recordId    Int?
 }
 
 model Post {
@@ -86,6 +88,7 @@ model Record {
   user      User     @relation(fields: [userId], references: [id])
   title     String
   photos    Photo[]
+  lands     Land[]
   theme     String
   userId    Int
   isPublic  Boolean  @default(true)

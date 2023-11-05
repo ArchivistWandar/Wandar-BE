@@ -1,0 +1,2 @@
+const typeDefs = "#graphql\n  type LoginResult {\n    ok: Boolean!\n    token: String\n    error: String\n  }\n\n  type Mutation {\n    login(username: String!, password: String!): LoginResult\n  }\n";
+export default typeDefs;

@@ -10,8 +10,12 @@
           "safari": "11.1"
         },
         "useBuiltIns": "usage",
-        "corejs": "3.6.5"
+        "corejs": "3.6.5",
+        "modules": false
       }
     ]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-async-to-generator"
   ]
 }

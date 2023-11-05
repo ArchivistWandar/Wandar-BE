@@ -1,0 +1,2 @@
+const typeDefs = "#graphql\n  type Land {\n    id: Int!\n    createdAt: String!\n    updatedAt: String!\n    user: User!\n    posts: [Post]\n    photos: [Photo]\n    landname: String!\n    composition: String\n    isMine: Boolean!\n\n\n  }\n";
+export default typeDefs;

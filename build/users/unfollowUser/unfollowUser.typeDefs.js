@@ -1,0 +1,2 @@
+const typeDefs = "#graphql\n  type UnfollowUserResult {\n    ok: Boolean!\n    error: String\n  }\n\n  type Mutation {\n    unfollowUser(username: String!): UnfollowUserResult\n  }\n\n";
+export default typeDefs;
