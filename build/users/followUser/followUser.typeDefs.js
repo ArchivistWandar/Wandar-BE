@@ -1,2 +1,0 @@
-const typeDefs = "#graphql\n\n  type FollowUserResult{\n    ok: Boolean!\n    error: String\n  }\n  type Mutation {\n    followUser(username: String!): FollowUserResult\n  }\n";
-export default typeDefs;

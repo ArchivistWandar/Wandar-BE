@@ -1,2 +1,0 @@
-const typeDefs = "#graphql\n  type SeeFollowersResult {\n    ok: Boolean!\n    error: String\n    followers: [User]\n    totalPages: Int\n  }\n  type Query {\n    seeFollowers(username: String!, page: Int!): SeeFollowersResult!\n  }\n";
-export default typeDefs;

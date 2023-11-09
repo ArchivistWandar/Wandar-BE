@@ -1,2 +1,0 @@
-const typeDefs = "#graphql\n  type User {\n    id: Int!\n    username: String!\n    email: String!\n    createdAt: String!\n    updatedAt: String!\n    lastUpdate: String!\n    bio: String\n    avatar: String\n    posts: [Post] \n    photos: [Photo]\n    lands: [Land]\n    following: [User]\n    followers: [User]\n    totalFollowers: Int!\n    totalFollowing: Int!\n    isMe: Boolean!\n    isFollowing: Boolean!\n  }\n";
-export default typeDefs;

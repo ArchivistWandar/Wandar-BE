@@ -1,3 +1,0 @@
-export const POST_CREATED = "POST_CREATED";
-export const RECORD_CREATED = "RECORD_CREATED";
-export const LAND_CREATED = "LAND_CREATED";

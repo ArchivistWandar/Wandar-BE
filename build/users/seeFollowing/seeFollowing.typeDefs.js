@@ -1,2 +1,0 @@
-const typeDefs = "#graphql\n  type SeeFollowingResult{\n    ok: Boolean!\n    error: String\n    following:[User]\n  }\n  type Query {\n    seeFollowing(username: String!, lastId: Int): SeeFollowingResult\n  }\n";
-export default typeDefs;

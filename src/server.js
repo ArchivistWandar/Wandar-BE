@@ -23,7 +23,7 @@ import { error } from "console";
 
 (async() => {
   const app = express();
-  const PORT = process.env.PORT;
+  const PORT = 3000;
   const httpServer = http.createServer(app);
   const schema = makeExecutableSchema({ typeDefs, resolvers });
 
