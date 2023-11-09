@@ -25,7 +25,7 @@ import { useServer } from 'graphql-ws/lib/use/ws';
 import { error } from "console";
 _asyncToGenerator(function* () {
   const app = express();
-  const PORT = process.env.PORT;
+  const PORT = 3000;
   const httpServer = http.createServer(app);
   const schema = makeExecutableSchema({
     typeDefs,
