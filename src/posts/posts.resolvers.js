@@ -27,7 +27,14 @@ export default {
     },
     land: ({ landId }) => {
       return client.land.findUnique({ where: { id: landId } })
+    },
+    record: ({ recordId }) => {
+      return client.record.findUnique({ where: { id: recordId } })
+    },
+    post: ({ postId }) => {
+      return client.post.findUnique({ where: { id: postId } })
     }
+
   },
   Hashtag: {
     posts: ({ id }) => {

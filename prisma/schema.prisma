@@ -11,20 +11,33 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  bio       String?
-  avatar    String?
-  email     String   @unique
-  password  String
-  photos    Photo[]
-  lands     Land[]
-  posts     Post[]
-  followers User[]   @relation("FollowRelation")
-  following User[]   @relation("FollowRelation")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Record    Record[]
+  id              Int             @id @default(autoincrement())
+  username        String          @unique
+  bio             String?
+  avatar          String?
+  email           String          @unique
+  password        String
+  photos          Photo[]
+  lands           Land[]
+  posts           Post[]
+  records         Record[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  requestSent     FriendRequest[] @relation("requestSender")
+  requestRecieved FriendRequest[] @relation("requestReciever")
+}
+
+model FriendRequest {
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  status          String   @default("PENDING")
+  requestSender   User     @relation("requestSender", fields: [senderId], references: [id])
+  requestReciever User     @relation("requestReciever", fields: [recieverId], references: [id])
+  senderId        Int
+  recieverId      Int
+
+  @@unique([senderId, recieverId])
 }
 
 model Land {
@@ -61,16 +74,17 @@ model Photo {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
   photo     String
   location  String?
   isPublic  Boolean  @default(true)
   user      User     @relation(fields: [userId], references: [id])
-  land      Land     @relation(fields: [landId], references: [id])
-  records   Record[]
+  land      Land?    @relation(fields: [landId], references: [id])
+  record    Record?  @relation(fields: [recordId], references: [id])
   userId    Int
-  landId    Int
-  postId    Int
+  landId    Int?
+  postId    Int?
+  recordId  Int?
 }
 
 model Hashtag {

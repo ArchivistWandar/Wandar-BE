@@ -4,7 +4,7 @@ const typeDefs = `#graphql
     editRecord (
       id: Int!
       title: String,
-      photoIds: [Int],
+      photos: [Upload],
       theme: String
       isPublic: Boolean
     ): MutationResponse!

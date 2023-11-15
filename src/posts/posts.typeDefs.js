@@ -20,8 +20,9 @@ const typeDefs = `#graphql
     updatedAt: String!
     photo: String!
     user: User!
-    post: Post!
-    land: Land!
+    post: Post
+    record: Record
+    land: Land
     isPublic: Boolean!
   }
 

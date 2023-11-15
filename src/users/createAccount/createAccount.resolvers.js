@@ -1,12 +1,12 @@
 import client from "../../client.js"
 import bcrypt from "bcrypt"
+import { uploadToS3 } from "../../shared/shared.utils.js";
 
 export default {
   Mutation: {
     createAccount: async (
       _,
       {
-        name,
         username,
         email,
         password
@@ -27,15 +27,20 @@ export default {
             ],
           },
         });
+
         if (existingUser) {
           throw new Error("This username/password is already taken.");
-
         }
+
+        // let avatarUrl = null;
+        // if (avatar) {
+        //   avatarUrl = await uploadToS3(avatar, loggedInUser.id, "avatars")
+        // }
+
         const uglyPassword = await bcrypt.hash(password, 10);
         await client.user.create({
           data:
           {
-            name,
             username,
             email,
             password: uglyPassword,

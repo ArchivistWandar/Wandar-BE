@@ -1,11 +1,11 @@
 const typeDefs = `#graphql
 
-  type FollowUserResult{
+  type sendFriendRequestResult {
     ok: Boolean!
     error: String
   }
   type Mutation {
-    followUser(username: String!): FollowUserResult
+    sendFriendRequest(username: String!): sendFriendRequestResult
   }
 `;
 

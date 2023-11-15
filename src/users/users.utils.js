@@ -1,6 +1,11 @@
 import jwt from "jsonwebtoken"
 import client from "../client.js"
 
+export const ACCEPTED = "ACCEPTED"
+export const PENDING = "PENDING"
+export const DECLINED = "DECLINED"
+
+
 export const getUser = async (token) => {
   try {
     if (!token) {

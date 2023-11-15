@@ -3,7 +3,7 @@ const typeDefs = `#graphql
   type Mutation {
     createRecord (
       title: String!,
-      photoIds: [Int!]!
+      photos: [Upload]!,
       theme: String!
       isPublic: Boolean!
     ): MutationResponse!

@@ -5,19 +5,30 @@ const typeDefs = `#graphql
     email: String!
     createdAt: String!
     updatedAt: String!
-    lastUpdate: String!
+    lastUpdate: String
     bio: String
     avatar: String
     posts: [Post] 
     photos: [Photo]
+    records: [Record]
     lands: [Land]
-    following: [User]
-    followers: [User]
-    totalFollowers: Int!
-    totalFollowing: Int!
+    requestSent: [FriendRequest]
+    requestRecieved: [FriendRequest]
+    friends: [User]
+    totalFriends: Int
     isMe: Boolean!
-    isFollowing: Boolean!
+    isFriend: Boolean!
   }
+  type FriendRequest {
+    id: Int!
+    createdAt: String!
+    updatedAt: String!
+    status: String!
+    requestSender: User!
+    requestReciever: User!
+  }
+
+
 `;
 
 export default typeDefs;
