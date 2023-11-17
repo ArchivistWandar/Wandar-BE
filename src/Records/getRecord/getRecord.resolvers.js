@@ -3,10 +3,11 @@ import { protectedResolver } from "../../users/users.utils.js";
 
 export default {
   Query: {
-    seeRecord: protectedResolver(
-      async (_, { username }, { loggedInUser }) => {
+    getRecord: protectedResolver(
+      async (_, { id }, { loggedInUser }) => {
         //자기 자신 record 조회시 전체 찾기
-        const records = await client.record.findMany({ where: { user: { username } }, include: { photos: true } })
+        const records = await client.record.findUnique({ where: { id }, include: {photos: true}})
+        console.log(records)
         return records
 
 

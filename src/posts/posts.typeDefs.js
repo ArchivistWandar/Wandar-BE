@@ -24,6 +24,7 @@ const typeDefs = `#graphql
     record: Record
     land: Land
     isPublic: Boolean!
+    isMine: Boolean!
   }
 
   type Hashtag {

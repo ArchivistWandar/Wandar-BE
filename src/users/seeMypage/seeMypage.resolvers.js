@@ -12,7 +12,7 @@ export default {
           include: {
             posts: { select: { photos: { select: { photo: true } }, createdAt: true, land: { select: { landname: true } } } },
             records: { select: { photos: { select: { photo: true } }, createdAt: true, lands: { select: { landname: true } } } },
-            lands: { select: { landname: true, createdAt: true } }
+            lands: { select: { landname: true, createdAt: true } },
           }
         })
 

@@ -1,6 +1,6 @@
 const typeDefs = `#graphql
   type Query {
-    seePhotos(userId: Int!): [Photo]
+    seePhotos(username: String!): [Photo]
   }
 `
 

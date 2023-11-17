@@ -80,7 +80,7 @@ model Photo {
   isPublic  Boolean  @default(true)
   user      User     @relation(fields: [userId], references: [id])
   land      Land?    @relation(fields: [landId], references: [id])
-  record    Record?  @relation(fields: [recordId], references: [id])
+  record    Record?  @relation(fields: [recordId], references: [id], onDelete: Cascade)
   userId    Int
   landId    Int?
   postId    Int?

@@ -4,8 +4,8 @@ import { protectedResolver } from "../../users/users.utils.js";
 export default {
   Query: {
     seeLand: protectedResolver(
-      async (_, { userId }) => {
-        const land = await client.land.findMany({ where: { userId }, select: { landname: true, composition: true, user: { select: { username: true } } } })
+      async (_, { username }) => {
+        const land = await client.land.findMany({ where: { user: { username } }, select: { userId: true, landname: true, composition: true, user: { select: { username: true } } } })
         return land
       }
     )

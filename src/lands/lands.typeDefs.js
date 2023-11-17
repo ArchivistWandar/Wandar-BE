@@ -9,7 +9,7 @@ const typeDefs = `#graphql
     landname: String!
     composition: String
     isMine: Boolean!
-
+    lastUpdate: String
 
   }
 `

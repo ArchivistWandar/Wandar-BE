@@ -3,20 +3,19 @@ import { protectedResolver } from "../../users/users.utils.js"
 
 export default {
   Query: {
-    seePosts: protectedResolver(
-      async (_, { username }, { loggedInUser }) => {
+    getLandPosts: protectedResolver(
+      async (_, { landId }, { loggedInUser }) => {
         //post의 ispublic이 true인 경우에만 찾기
         //자기 자신 post 조회시 전체 찾기
-        const user = await client.user.findUnique({ where: { username }, select: { id: true } })
+        const user = await client.user.findFirst({ where: { lands: { some: { id: landId } } }, select: { id: true } })
         if (!user) {
           throw new Error("User not found.")
         }
 
-        
+
         if (loggedInUser.id != user.id) {
-          console.log(loggedInUser.username, username)
           const postList = await client.post.findMany({
-            where: { user: { id: user.id }, isPublic: true },
+            where: { landId, isPublic: true },
             include: {
               photos: { select: { photo: true } },
               land: true,
@@ -24,11 +23,10 @@ export default {
               hashtags: true
             }
           })
-          console.log(postList)
           return postList
         } else {
           const postList = await client.post.findMany({
-            where: { user: { id: user.id } },
+            where: { landId },
             include: {
               photos: { select: { photo: true } },
               land: true,

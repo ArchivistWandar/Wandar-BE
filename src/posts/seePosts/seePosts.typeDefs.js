@@ -1,6 +1,6 @@
 const typeDefs = `#graphql
   type Query {
-    seePosts(userId: Int!):[Post]
+    seePosts(username: String!):[Post]
   }
 `
 export default typeDefs

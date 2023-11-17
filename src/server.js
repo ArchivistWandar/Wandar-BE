@@ -28,6 +28,7 @@ import { error } from "console";
   const schema = makeExecutableSchema({ typeDefs, resolvers });
 
   // Creating the WebSocket server
+  
   const wsServer = new WebSocketServer({
     // This is the `httpServer` we created in a previous step.
     server: httpServer,

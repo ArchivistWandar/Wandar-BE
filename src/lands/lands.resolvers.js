@@ -17,5 +17,16 @@ export default {
       }
       return await userId === loggedInUser.id
     },
+    lastUpdate: async ({ id }) => {
+      const latestPost = await client.post.findFirst({
+        where: { landId: id },
+        orderBy: { createdAt: 'desc' },
+      })
+      console.log("latestupdate is", latestPost.createdAt)
+      // console.log(latestPost ? latestPost.createdAt : null)
+      return latestPost ? latestPost.createdAt : null;
+
+    }
+
   },
 }
