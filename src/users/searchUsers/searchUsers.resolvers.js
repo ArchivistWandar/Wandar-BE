@@ -6,11 +6,15 @@ export default {
       const users = await client.user
         .findMany({
           where: { username: { startsWith: keyword.toLowerCase() } },
-          select: { id: true, username: true, avatar: true },
-          take: 2,
+          orderBy: {
+            id: 'asc',
+          },
+          select: { username: true, avatar: true, id: true },
+          take: 10,
           skip: lastId ? 1 : 0,
-          ...(lastId && { cursor: { id: lastId } })
+          cursor: lastId ? { id: lastId } : undefined
         })
+        console.log(lastId)
 
       return users
     }
