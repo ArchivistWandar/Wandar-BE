@@ -9,7 +9,7 @@ export default {
           orderBy: {
             id: 'asc',
           },
-          select: { username: true, avatar: true, id: true },
+          select: { username: true, avatar: true, id: true, updatedAt: true },
           take: 10,
           skip: lastId ? 1 : 0,
           cursor: lastId ? { id: lastId } : undefined

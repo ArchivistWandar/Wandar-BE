@@ -56,14 +56,14 @@ export default {
     posts: ({ id }) => client.post.findMany({ where: { userId: id, isPublic: true } }),
     records: ({ id }) => client.record.findMany({ where: { userId: id, isPublic: true } }),
     lands: ({ id }) => client.land.findMany({ where: { userId: id } }),
-    lastUpdate: async ({ id }) => {
+    lastUpdate: async ({ id, updatedAt }) => {
       const latestPost = await client.post.findFirst({
         where: { userId: id },
         orderBy: { createdAt: 'desc' },
       })
 
       // console.log(latestPost ? latestPost.createdAt : null)
-      return latestPost ? latestPost.createdAt : null;
+      return latestPost ? latestPost.createdAt : updatedAt;
     }
 
   },
