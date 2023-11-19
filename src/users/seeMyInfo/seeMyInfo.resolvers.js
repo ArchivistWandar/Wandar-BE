@@ -10,6 +10,7 @@ export default {
             id: loggedInUser.id
           },
           select: {
+            id: true,
             username: true,
             avatar: true
           }

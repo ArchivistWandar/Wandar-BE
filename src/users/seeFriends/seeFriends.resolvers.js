@@ -18,7 +18,7 @@ export default {
             { requestSent: { some: { recieverId: foundUser.id, status: ACCEPTED } } }
           ]
         },
-        select: { username: true, avatar: true }
+        select: { id: true, username: true, avatar: true, }
       })
 
       return {

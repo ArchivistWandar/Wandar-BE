@@ -38,14 +38,18 @@ export default {
         ]
       },
     }),
-    totalFriends: ({ id }) => client.user.count({
-      where: {
-        OR: [
-          { requestRecieved: { some: { senderId: id, status: ACCEPTED }, } },
-          { requestSent: { some: { recieverId: id, status: ACCEPTED } } }
-        ]
-      },
-    }),
+
+    totalFriends: ({ id }) => {
+      
+      return client.user.count({
+        where: {
+          OR: [
+            { requestRecieved: { some: { senderId: id, status: ACCEPTED }, } },
+            { requestSent: { some: { recieverId: id, status: ACCEPTED } } }
+          ]
+        },
+      })
+    },
     requestSent: ({ id }) => client.friendRequest.findMany({ where: { senderId: id } }),
     requestRecieved: ({ id }) => client.friendRequest.findMany({ where: { recieverIdId: id } }),
     photos: ({ id }) => client.photo.findMany({ where: { userId: id } }),
