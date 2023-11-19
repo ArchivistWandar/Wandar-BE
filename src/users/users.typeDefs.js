@@ -18,6 +18,7 @@ const typeDefs = `#graphql
     totalFriends: Int
     isMe: Boolean!
     isFriend: Boolean!
+    isPending: String
   }
   type FriendRequest {
     id: Int!

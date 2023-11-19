@@ -1,5 +1,5 @@
 import client from "../client.js"
-import { ACCEPTED } from "./users.utils.js"
+import { ACCEPTED, PENDING } from "./users.utils.js"
 
 
 export default {
@@ -30,6 +30,34 @@ export default {
       return Boolean(exists)
 
     },
+    isPending: async ({ id }, _, { loggedInUser }) => {
+      if (!loggedInUser) {
+        return null
+      }
+      // const exists = await client.user.findUnique({ where: { username: loggedInUser.username } })
+      //   .following({ where: { id } })
+
+      const recievedButPending = await client.user.count({
+        where: {
+          requestRecieved: { some: { recieverId: loggedInUser.id, senderId: id, status: PENDING }, }
+        },
+      })
+      console.log("recieved but pending", recievedButPending)
+      const sentButPending = await client.user.count({
+        where: {
+          requestRecieved: { some: { recieverId: id, senderId: loggedInUser.id, status: PENDING }, }
+        },
+      })
+      console.log("sent but pending", sentButPending)
+      if (recievedButPending) {
+        return "receivedButPending"
+      } else if (sentButPending) {
+        return "sentButPending"
+      } else {
+        return null
+      }
+
+    },
     friends: ({ id }) => client.user.findMany({
       where: {
         OR: [
@@ -40,7 +68,7 @@ export default {
     }),
 
     totalFriends: ({ id }) => {
-      
+
       return client.user.count({
         where: {
           OR: [
@@ -51,7 +79,7 @@ export default {
       })
     },
     requestSent: ({ id }) => client.friendRequest.findMany({ where: { senderId: id } }),
-    requestRecieved: ({ id }) => client.friendRequest.findMany({ where: { recieverIdId: id } }),
+    requestRecieved: ({ id }) => client.friendRequest.findMany({ where: { recieverId: id } }),
     photos: ({ id }) => client.photo.findMany({ where: { userId: id } }),
     posts: ({ id }) => client.post.findMany({ where: { userId: id, isPublic: true } }),
     records: ({ id }) => client.record.findMany({ where: { userId: id, isPublic: true } }),
