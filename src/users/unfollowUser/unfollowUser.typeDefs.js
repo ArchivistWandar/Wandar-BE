@@ -1,11 +1,11 @@
 const typeDefs = `#graphql
-  type UnfollowUserResult {
+  type deleteFriendResult {
     ok: Boolean!
     error: String
   }
 
   type Mutation {
-    unfollowUser(username: String!): UnfollowUserResult
+    deleteFriend(username: String!): deleteFriendResult
   }
 
 `
