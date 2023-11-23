@@ -5,19 +5,16 @@ export default {
   Query: {
     getPost: protectedResolver(
       async (_, { id }, { loggedInUser }) => {
-        //post의 ispublic이 true인 경우에만 찾기
-        //자기 자신 post 조회시 전체 찾기
-        // const user = await client.user.findFirst({ where: { lands: { some: { id: landId } } }, select: { id: true } })
-        // if (!user) {
-        //   throw new Error("User not found.")
-        // }
+
+        console.log("getpost")
 
         const post = await client.post.findUnique({
-          where: { id },
+          where: { id, },
           include: { photos: { select: { photo: true } }, land: { select: { landname: true } } }
         })
 
-        if (post.userId != loggedInUser.id) {
+
+        if ((post.userId != loggedInUser.id) && (!post.isPublic)){
           throw new Error("Unauthorized User.")
         } else {
           return post

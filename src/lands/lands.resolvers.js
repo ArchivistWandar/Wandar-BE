@@ -22,7 +22,7 @@ export default {
         where: { landId: id },
         orderBy: { createdAt: 'desc' },
       })
-      console.log("latestupdate is", latestPost.createdAt)
+      
       // console.log(latestPost ? latestPost.createdAt : null)
       return latestPost ? latestPost.createdAt : null;
 

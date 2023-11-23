@@ -14,7 +14,6 @@ export default {
 
         
         if (loggedInUser.id != user.id) {
-          console.log(loggedInUser.username, username)
           const postList = await client.post.findMany({
             where: { user: { id: user.id }, isPublic: true },
             include: {
@@ -24,7 +23,6 @@ export default {
               hashtags: true
             }
           })
-          console.log(postList)
           return postList
         } else {
           const postList = await client.post.findMany({
